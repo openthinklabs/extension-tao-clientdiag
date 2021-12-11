@@ -1,6 +1,6 @@
 {
 
-    "name": "oat-sa/extension-tao-clientdiag",
+    "name": "openthinklabs/extension-tao-clientdiag",
     "description" : "Check compatibility of the os and browser of a client",
     "type" : "tao-extension",
     "authors" : [
