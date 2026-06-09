@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -15,7 +14,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2017-2023 (original work) Open Assessment Technologies SA.
+ * Copyright (c) 2017 (original work) Open Assessment Technologies SA ;
  *
  */
 
@@ -31,36 +30,36 @@ class Paginator
     /**
      * The default number of rows displayed in a page
      */
-    public const DEFAULT_ROWS = 25;
+    const DEFAULT_ROWS = 25;
 
     /**
      * The index of the default page
      */
-    public const DEFAULT_PAGE = 1;
+    const DEFAULT_PAGE = 1;
 
     /**
      * The index of the option providing the number of rows per page
      */
-    public const OPTION_ROWS = 'rows';
+    const OPTION_ROWS = 'rows';
 
     /**
      * The index of the option providing the page number
      */
-    public const OPTION_PAGE = 'page';
+    const OPTION_PAGE = 'page';
 
     /**
      * The index of the option providing the page filter
      */
-    public const OPTION_FILTER = 'filter';
+    const OPTION_FILTER = 'filter';
 
     /**
      * Paginates a collection to render a subset in a table
      *
-     * @param array|PaginatedStorage $collection The full amount of lines to paginate
-     * @param ?array $options Allow to setup the page. These options are supported:
+     * @param array|PaginatedStorage $collection - The full amount of lines to paginate
+     * @param array [$options] - Allow to setup the page. These options are supported:
      * - self::OPTION_ROWS : The number of rows per page
      * - self::OPTION_PAGE : The index of the page to get
-     * @param ?function $dataRenderer An optional callback function provided to format the paginated data
+     * @param function [$dataRenderer] - An optional callback function provided to format the paginated data
      * @return array
      */
     public function paginate($collection, $options = array(), $dataRenderer = null)

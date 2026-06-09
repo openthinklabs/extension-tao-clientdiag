@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +19,6 @@
 
 namespace oat\taoClientDiagnostic\scripts\install;
 
-use common_report_Report;
 use oat\oatbox\extension\InstallAction;
 
 /**
@@ -32,7 +30,7 @@ class ActivateMediaIntensiveCheck extends InstallAction
 {
     /**
      * @param $params
-     * @return common_report_Report
+     * @return \common_report_Report
      */
     public function __invoke($params)
     {
@@ -55,12 +53,9 @@ class ActivateMediaIntensiveCheck extends InstallAction
             $config['testers']['intensive_bandwidth']['fallbackThreshold'] = 0.2;
             $extension->setConfig('clientDiag', $config);
 
-            return new common_report_Report(
-                common_report_Report::TYPE_SUCCESS,
-                "The Media Intensive check has been activated!"
-            );
+            return new \common_report_Report(\common_report_Report::TYPE_SUCCESS, "The Media Intensive check has been activated!");
         } catch (\Exception $e) {
-            return new common_report_Report(common_report_Report::TYPE_ERROR, $e->getMessage());
+            return new \common_report_Report(\common_report_Report::TYPE_ERROR, $e->getMessage());
         }
     }
 }

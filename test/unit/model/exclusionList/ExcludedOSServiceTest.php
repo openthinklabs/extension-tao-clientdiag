@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,7 +16,6 @@
  *
  * Copyright (c) 2021 (original work) Open Assessment Technologies SA;
  */
-
 declare(strict_types=1);
 
 namespace oat\taoClientDiagnostic\test\unit\exclusionList;
@@ -29,7 +27,7 @@ use core_kernel_classes_Resource;
 use oat\generis\model\OntologyRdfs;
 use oat\generis\test\TestCase;
 use oat\taoClientDiagnostic\model\exclusionList\ExcludedOSService;
-use oat\generis\model\data\Ontology;
+use \oat\generis\model\data\Ontology;
 
 class ExcludedOSServiceTest extends TestCase
 {

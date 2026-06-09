@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -15,15 +14,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2015-2023 (original work) Open Assessment Technologies SA.
+ * Copyright (c) 2015-2019 (original work) Open Assessment Technologies SA;
+ *
  */
 
 namespace oat\taoClientDiagnostic\scripts\update;
 
-use common_ext_ExtensionsManager;
-use common_ext_ExtensionUpdater;
 use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Types\Type;
 use oat\tao\model\accessControl\func\AccessRule;
 use oat\tao\model\accessControl\func\AclProxy;
@@ -45,11 +42,11 @@ use oat\taoClientDiagnostic\model\storage\Storage;
 use oat\taoClientDiagnostic\model\diagnostic\DiagnosticService;
 
 /**
- * @deprecated use migrations instead.
- * @see https://github.com/oat-sa/generis/wiki/Tao-Update-Process
+ * @deprecated use migrations instead. See https://github.com/oat-sa/generis/wiki/Tao-Update-Process
  */
-class Updater extends common_ext_ExtensionUpdater
+class Updater extends \common_ext_ExtensionUpdater
 {
+
     /**
      * Update platform at version jump
      *
@@ -65,6 +62,7 @@ class Updater extends common_ext_ExtensionUpdater
         }
 
         if ($currentVersion == '1.0.1') {
+
             $currentVersion = '1.1.0';
         }
 
@@ -79,10 +77,7 @@ class Updater extends common_ext_ExtensionUpdater
         }
 
         if ($currentVersion == '1.1.1') {
-            $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
-                ->getExtensionById('taoClientDiagnostic');
-
+            $extension = $this->getServiceManager()->get(\common_ext_ExtensionsManager::SERVICE_ID)->getExtensionById('taoClientDiagnostic');
             $extension->setConfig('clientDiag', array(
                 'footer' => '',
             ));
@@ -91,10 +86,7 @@ class Updater extends common_ext_ExtensionUpdater
         }
 
         if ($currentVersion == '1.2.0') {
-            $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
-                ->getExtensionById('taoClientDiagnostic');
-
+            $extension = $this->getServiceManager()->get(\common_ext_ExtensionsManager::SERVICE_ID)->getExtensionById('taoClientDiagnostic');
             $config = $extension->getConfig('clientDiag');
             $extension->setConfig('clientDiag', array_merge($config, array(
                 'performances' => array(
@@ -120,28 +112,17 @@ class Updater extends common_ext_ExtensionUpdater
 
         $this->setVersion($currentVersion);
 
-        if ($this->isVersion('1.3.0')) {
-            $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
-                ->getExtensionById('taoClientDiagnostic');
-
+        if($this->isVersion('1.3.0')) {
+            $extension = $this->getServiceManager()->get(\common_ext_ExtensionsManager::SERVICE_ID)->getExtensionById('taoClientDiagnostic');
             $config = $extension->getConfig('clientDiag');
-            $extension->setConfig(
-                'clientDiag',
-                array_merge(
-                    $config,
-                    array(
-                        //phpcs:disable
-                        'diagHeader' => 'This tool will run a number of tests in order to establish how well your current environment is suitable to run the TAO platform.',
-                        //phpcs:enable
-                    )
-                )
-            );
+            $extension->setConfig('clientDiag', array_merge($config, array(
+                'diagHeader' => 'This tool will run a number of tests in order to establish how well your current environment is suitable to run the TAO platform.',
+            )));
 
             $this->setVersion('1.3.1');
         }
 
-        if ($this->isVersion('1.3.1')) {
+        if($this->isVersion('1.3.1')) {
             AclProxy::applyRule(new AccessRule(
                 AccessRule::GRANT,
                 TaoRoles::ANONYMOUS,
@@ -156,7 +137,7 @@ class Updater extends common_ext_ExtensionUpdater
             $this->setVersion('1.4.0');
         }
 
-        if ($this->isVersion('1.4.0')) {
+        if($this->isVersion('1.4.0')) {
             $service = $this->getServiceManager()->get(Authorization::SERVICE_ID);
 
             if ($service instanceof RequireUsername) {
@@ -170,15 +151,11 @@ class Updater extends common_ext_ExtensionUpdater
             $this->setVersion('1.4.1');
         }
 
-        if ($this->isVersion('1.4.1')) {
+        if($this->isVersion('1.4.1')) {
             if (!$this->getServiceManager()->has(Storage::SERVICE_ID)) {
-                $service = new Csv(
-                    //phpcs:disable
-                    array(
-                        'filename' => FILES_PATH . 'taoClientDiagnostic' . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'store.csv'
-                    )
-                    //phpcs:enable
-                );
+                $service = new Csv(array(
+                    'filename' => FILES_PATH . 'taoClientDiagnostic' . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'store.csv'
+                ));
 
                 $this->getServiceManager()->register(Storage::SERVICE_ID, $service);
             }
@@ -199,7 +176,7 @@ class Updater extends common_ext_ExtensionUpdater
 
                 $fromSchema = clone $schema;
 
-                /** @var Table $tableResults */
+                /** @var \Doctrine\DBAL\Schema\Table $tableResults */
                 $tableResults = $schema->getTable(Sql::DIAGNOSTIC_TABLE);
 
                 $tableResults->dropColumn('browserVersion');
@@ -208,10 +185,7 @@ class Updater extends common_ext_ExtensionUpdater
                 $tableResults->addColumn(Sql::DIAGNOSTIC_BROWSERVERSION, 'string', ['length' => 32]);
                 $tableResults->addColumn(Sql::DIAGNOSTIC_OSVERSION, 'string', ['length' => 32]);
 
-                $tableResults->changeColumn(
-                    Sql::DIAGNOSTIC_VERSION,
-                    ['type' => Type::getType('string'), 'length' => 16]
-                );
+                $tableResults->changeColumn(Sql::DIAGNOSTIC_VERSION, ['type' => Type::getType('string'), 'length' => 16]);
 
                 $tableResults->changeColumn(Sql::DIAGNOSTIC_BROWSER, ['notnull' => false]);
                 $tableResults->changeColumn(Sql::DIAGNOSTIC_OS, ['notnull' => false]);
@@ -260,7 +234,7 @@ class Updater extends common_ext_ExtensionUpdater
                 $addTempSchema = clone $schema;
                 $tableResults = $addTempSchema->getTable(Sql::DIAGNOSTIC_TABLE);
                 $tableResults->changeColumn(Sql::DIAGNOSTIC_BROWSERVERSION, ['notnull' => false]);
-                $tableResults->changeColumn(Sql::DIAGNOSTIC_OSVERSION, ['notnull' => false]);
+                $tableResults->changeColumn(Sql::DIAGNOSTIC_OSVERSION   , ['notnull' => false]);
                 $tableResults->addColumn('compatible_tmp', 'integer', ['length' => 1, 'notnull' => false]);
                 $queries = $persistence->getPlatform()->getMigrateSchemaSql($schema, $addTempSchema);
                 foreach ($queries as $query) {
@@ -268,22 +242,23 @@ class Updater extends common_ext_ExtensionUpdater
                 }
 
                 /* Migrate data to temp column */
-                $sql =  'SELECT ' . Sql::DIAGNOSTIC_ID . ', ' . Sql::DIAGNOSTIC_COMPATIBLE .
+                $sql =  'SELECT ' . Sql::DIAGNOSTIC_ID . ', ' .Sql::DIAGNOSTIC_COMPATIBLE .
                         ' FROM ' . Sql::DIAGNOSTIC_TABLE;
                 $stmt = $persistence->query($sql);
                 $results = $stmt->fetchAll();
 
                 foreach ($results as $result) {
-                    if ($result['compatible'] === true || $result['compatible'] == 1) {
+
+                    if ($result['compatible']===true || $result['compatible']==1) {
                         $compatible = 1;
-                    } elseif ($result['compatible'] === false || $result['compatible'] == 0) {
+                    } elseif ($result['compatible']===false || $result['compatible']==0) {
                         $compatible = 0;
                     } else {
                         $compatible = (int) $result['compatible'];
                     }
 
                     $sql = 'UPDATE ' . Sql::DIAGNOSTIC_TABLE .
-                           ' SET compatible_tmp = :compatible' .
+                           ' SET compatible_tmp = :compatible'.
                            ' WHERE ' . Sql::DIAGNOSTIC_ID . ' = :id';
                     $persistence->exec($sql, array(
                         'compatible' => $compatible,
@@ -304,11 +279,7 @@ class Updater extends common_ext_ExtensionUpdater
                 $addCompatibleSchema = clone $deleteCompatibleSchema;
                 $tableResults = $addCompatibleSchema->getTable(Sql::DIAGNOSTIC_TABLE);
                 $tableResults->addColumn(Sql::DIAGNOSTIC_COMPATIBLE, 'integer', ['length' => 1, 'notnull' => false]);
-                $queries = $persistence->getPlatform()->getMigrateSchemaSql(
-                    $deleteCompatibleSchema,
-                    $addCompatibleSchema
-                );
-
+                $queries = $persistence->getPlatform()->getMigrateSchemaSql($deleteCompatibleSchema, $addCompatibleSchema);
                 foreach ($queries as $query) {
                     $persistence->exec($query);
                 }
@@ -334,12 +305,9 @@ class Updater extends common_ext_ExtensionUpdater
         $this->skip('1.7.1', '1.9.1');
 
         if ($this->isVersion('1.9.1')) {
-            $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
-                ->getExtensionById('taoClientDiagnostic');
-
+            $extension = $this->getServiceManager()->get(\common_ext_ExtensionsManager::SERVICE_ID)->getExtensionById('taoClientDiagnostic');
             $config = $extension->getConfig('clientDiag');
-            $config['upload'] = [
+            $config['upload'] =[
                 'size' => 1 * 1024 * 1024,
                 'optimal' => 1 * 1024 * 1024,
             ];
@@ -349,7 +317,8 @@ class Updater extends common_ext_ExtensionUpdater
 
         $this->skip('1.10.0', '1.10.1');
 
-        if ($this->isVersion('1.10.1')) {
+        if($this->isVersion('1.10.1')){
+
             $storageService  = $this->getServiceManager()->get(Storage::SERVICE_ID);
 
             if ($storageService instanceof Sql) {
@@ -359,7 +328,7 @@ class Updater extends common_ext_ExtensionUpdater
 
                 $fromSchema = clone $schema;
 
-                /** @var Table $tableResults */
+                /** @var \Doctrine\DBAL\Schema\Table $tableResults */
                 $tableResults = $schema->getTable(Sql::DIAGNOSTIC_TABLE);
 
                 $tableResults->addColumn(Sql::DIAGNOSTIC_UPLOAD_MAX, 'float', ['notnull' => false]);
@@ -380,17 +349,16 @@ class Updater extends common_ext_ExtensionUpdater
             $service = $this->safeLoadService(Storage::SERVICE_ID);
             if (!$service instanceof Storage) {
                 // invalid Service, replace with default
-                $this->getServiceManager()->register(
-                    Storage::SERVICE_ID,
-                    new PaginatedSqlStorage($service->getOptions())
-                );
+                $this->getServiceManager()->register(Storage::SERVICE_ID, new PaginatedSqlStorage($service->getOptions()));
             }
         }
 
         if ($this->isVersion('1.13.2')) {
+
             $storageService  = $this->getServiceManager()->get(Storage::SERVICE_ID);
 
             if ($storageService instanceof Sql) {
+
                 if (! $storageService instanceof PaginatedStorage) {
                     $paginatedStorage = new PaginatedSqlStorage($storageService->getOptions());
                     $this->getServiceManager()->register(Storage::SERVICE_ID, $paginatedStorage);
@@ -403,11 +371,7 @@ class Updater extends common_ext_ExtensionUpdater
                 $tableResults = $schema->getTable(Sql::DIAGNOSTIC_TABLE);
 
                 if (! $tableResults->hasColumn(PaginatedSqlStorage::DIAGNOSTIC_WORKSTATION)) {
-                    $tableResults->addColumn(
-                        PaginatedSqlStorage::DIAGNOSTIC_WORKSTATION,
-                        'string',
-                        ['length' => 64, 'notnull' => false]
-                    );
+                    $tableResults->addColumn(PaginatedSqlStorage::DIAGNOSTIC_WORKSTATION, 'string', ['length' => 64, 'notnull' => false]);
                     $queries = $persistence->getPlatform()->getMigrateSchemaSql($fromSchema, $schema);
                     foreach ($queries as $query) {
                         $persistence->exec($query);
@@ -422,20 +386,8 @@ class Updater extends common_ext_ExtensionUpdater
 
         if ($this->isVersion('1.14.1')) {
             OntologyUpdater::syncModels();
-            AclProxy::applyRule(
-                new AccessRule(
-                    AccessRule::GRANT,
-                    ClientDiagnosticRoles::READINESS_CHECKER_ROLE,
-                    Diagnostic::class
-                )
-            );
-            AclProxy::applyRule(
-                new AccessRule(
-                    AccessRule::GRANT,
-                    ClientDiagnosticRoles::READINESS_CHECKER_ROLE,
-                    DiagnosticChecker::class
-                )
-            );
+            AclProxy::applyRule(new AccessRule(AccessRule::GRANT, ClientDiagnosticRoles::READINESS_CHECKER_ROLE, Diagnostic::class));
+            AclProxy::applyRule(new AccessRule(AccessRule::GRANT, ClientDiagnosticRoles::READINESS_CHECKER_ROLE, DiagnosticChecker::class));
             $this->setVersion('1.14.2');
         }
 
@@ -450,11 +402,7 @@ class Updater extends common_ext_ExtensionUpdater
                 $tableResults = $schema->getTable(Sql::DIAGNOSTIC_TABLE);
 
                 if (! $tableResults->hasColumn(PaginatedSqlStorage::DIAGNOSTIC_CONTEXT_ID)) {
-                    $tableResults->addColumn(
-                        PaginatedSqlStorage::DIAGNOSTIC_CONTEXT_ID,
-                        'string',
-                        ['length' => 256, 'notnull' => false]
-                    );
+                    $tableResults->addColumn(PaginatedSqlStorage::DIAGNOSTIC_CONTEXT_ID, 'string', ['length' => 256, 'notnull' => false]);
                     $queries = $persistence->getPlatform()->getMigrateSchemaSql($fromSchema, $schema);
                     foreach ($queries as $query) {
                         $persistence->exec($query);
@@ -468,10 +416,7 @@ class Updater extends common_ext_ExtensionUpdater
         $this->skip('1.15.0', '2.0.1');
 
         if ($this->isVersion('2.0.1')) {
-            $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
-                ->getExtensionById('taoClientDiagnostic');
-
+            $extension = $this->getServiceManager()->get(\common_ext_ExtensionsManager::SERVICE_ID)->getExtensionById('taoClientDiagnostic');
             $config = $extension->getConfig('clientDiag');
             $newConfig = [
                 'diagHeader' => $config['diagHeader'],
@@ -503,7 +448,7 @@ class Updater extends common_ext_ExtensionUpdater
             $this->setVersion('2.1.0');
         }
 
-        if ($this->isVersion('2.1.0')) {
+		if ($this->isVersion('2.1.0')) {
             $storageService  = $this->getServiceManager()->get(Storage::SERVICE_ID);
 
             if ($storageService instanceof Sql) {
@@ -535,14 +480,11 @@ class Updater extends common_ext_ExtensionUpdater
         $this->skip('2.4.0', '2.6.1');
 
         if ($this->isVersion('2.6.1')) {
-            $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
-                ->getExtensionById('taoClientDiagnostic');
-
+            $extension = $this->getServiceManager()->get(\common_ext_ExtensionsManager::SERVICE_ID)->getExtensionById('taoClientDiagnostic');
             $config = $extension->getConfig('clientDiag');
 
             if (isset($config['testers'])) {
-                foreach ($config['testers'] as &$tester) {
+                foreach($config['testers'] as &$tester) {
                     $tester['enabled'] = true;
                     $tester['level'] = 1;
                 }
@@ -568,26 +510,18 @@ class Updater extends common_ext_ExtensionUpdater
 
                 $fromSchema = clone $schema;
 
-                /** @var Table $tableResults */
+                /** @var \Doctrine\DBAL\Schema\Table $tableResults */
                 $tableResults = $schema->getTable(Sql::DIAGNOSTIC_TABLE);
 
                 $tableResults->addColumn(Sql::DIAGNOSTIC_INTENSIVE_BANDWIDTH_MIN, 'float', ['notnull' => false]);
                 $tableResults->addColumn(Sql::DIAGNOSTIC_INTENSIVE_BANDWIDTH_MAX, 'float', ['notnull' => false]);
                 $tableResults->addColumn(Sql::DIAGNOSTIC_INTENSIVE_BANDWIDTH_SUM, 'float', ['notnull' => false]);
-                $tableResults->addColumn(
-                    Sql::DIAGNOSTIC_INTENSIVE_BANDWIDTH_COUNT,
-                    'integer',
-                    ['length' => 16, 'notnull' => false]
-                );
+                $tableResults->addColumn(Sql::DIAGNOSTIC_INTENSIVE_BANDWIDTH_COUNT, 'integer', ['length' => 16, 'notnull' => false]);
                 $tableResults->addColumn(Sql::DIAGNOSTIC_INTENSIVE_BANDWIDTH_AVERAGE, 'float', ['notnull' => false]);
                 $tableResults->addColumn(Sql::DIAGNOSTIC_INTENSIVE_BANDWIDTH_MEDIAN, 'float', ['notnull' => false]);
                 $tableResults->addColumn(Sql::DIAGNOSTIC_INTENSIVE_BANDWIDTH_VARIANCE, 'float', ['notnull' => false]);
                 $tableResults->addColumn(Sql::DIAGNOSTIC_INTENSIVE_BANDWIDTH_DURATION, 'float', ['notnull' => false]);
-                $tableResults->addColumn(
-                    Sql::DIAGNOSTIC_INTENSIVE_BANDWIDTH_SIZE,
-                    'integer',
-                    ['length' => 16, 'notnull' => false]
-                );
+                $tableResults->addColumn(Sql::DIAGNOSTIC_INTENSIVE_BANDWIDTH_SIZE, 'integer', ['length' => 16, 'notnull' => false]);
 
                 $queries = $persistence->getPlatform()->getMigrateSchemaSql($fromSchema, $schema);
                 foreach ($queries as $query) {
@@ -601,10 +535,7 @@ class Updater extends common_ext_ExtensionUpdater
         $this->skip('2.7.0', '2.8.1');
 
         if ($this->isVersion('2.8.1')) {
-            $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
-                ->getExtensionById('taoClientDiagnostic');
-
+            $extension = $this->getServiceManager()->get(\common_ext_ExtensionsManager::SERVICE_ID)->getExtensionById('taoClientDiagnostic');
             $config = $extension->getConfig('clientDiag');
 
             $config['testers']['performance']['customMsgKey'] = 'diagPerformancesCheckResult';
@@ -631,34 +562,14 @@ class Updater extends common_ext_ExtensionUpdater
 
                 $fromSchema = clone $schema;
 
-                /** @var Table $tableResults */
+                /** @var \Doctrine\DBAL\Schema\Table $tableResults */
                 $tableResults = $schema->getTable(Sql::DIAGNOSTIC_TABLE);
 
-                $tableResults->addColumn(
-                    Sql::DIAGNOSTIC_FINGERPRINT_UUID,
-                    'string',
-                    ['length' => 32, 'notnull' => false]
-                );
-                $tableResults->addColumn(
-                    Sql::DIAGNOSTIC_FINGERPRINT_VALUE,
-                    'string',
-                    ['length' => 32, 'notnull' => false]
-                );
-                $tableResults->addColumn(
-                    Sql::DIAGNOSTIC_FINGERPRINT_DETAILS,
-                    'text',
-                    ['notnull' => false]
-                );
-                $tableResults->addColumn(
-                    Sql::DIAGNOSTIC_FINGERPRINT_ERRORS,
-                    'integer',
-                    ['length' => 1, 'notnull' => false]
-                );
-                $tableResults->addColumn(
-                    Sql::DIAGNOSTIC_FINGERPRINT_CHANGED,
-                    'integer',
-                    ['length' => 1, 'notnull' => false]
-                );
+                $tableResults->addColumn(Sql::DIAGNOSTIC_FINGERPRINT_UUID, 'string', ['length' => 32, 'notnull' => false]);
+                $tableResults->addColumn(Sql::DIAGNOSTIC_FINGERPRINT_VALUE, 'string', ['length' => 32, 'notnull' => false]);
+                $tableResults->addColumn(Sql::DIAGNOSTIC_FINGERPRINT_DETAILS, 'text', ['notnull' => false]);
+                $tableResults->addColumn(Sql::DIAGNOSTIC_FINGERPRINT_ERRORS, 'integer', ['length' => 1, 'notnull' => false]);
+                $tableResults->addColumn(Sql::DIAGNOSTIC_FINGERPRINT_CHANGED, 'integer', ['length' => 1, 'notnull' => false]);
 
                 $queries = $persistence->getPlatform()->getMigrateSchemaSql($fromSchema, $schema);
                 foreach ($queries as $query) {
@@ -672,11 +583,9 @@ class Updater extends common_ext_ExtensionUpdater
         $this->skip('2.9.0', '2.10.1');
 
         if ($this->isVersion('2.10.1')) {
-            $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
-                ->getExtensionById('taoClientDiagnostic');
-
+            $extension = $this->getServiceManager()->get(\common_ext_ExtensionsManager::SERVICE_ID)->getExtensionById('taoClientDiagnostic');
             $config = $extension->getConfig('clientDiag');
+
             $config['requireSchoolName'] = false;
 
             $extension->setConfig('clientDiag', $config);
@@ -690,15 +599,11 @@ class Updater extends common_ext_ExtensionUpdater
 
                 $fromSchema = clone $schema;
 
-                /** @var Table $tableResults */
+                /** @var \Doctrine\DBAL\Schema\Table $tableResults */
                 $tableResults = $schema->getTable(Sql::DIAGNOSTIC_TABLE);
 
                 if (! $tableResults->hasColumn(PaginatedSqlStorage::DIAGNOSTIC_SCHOOL_NAME)) {
-                    $tableResults->addColumn(
-                        Sql::DIAGNOSTIC_SCHOOL_NAME,
-                        'string',
-                        ['length' => 255, 'notnull' => false]
-                    );
+                    $tableResults->addColumn(Sql::DIAGNOSTIC_SCHOOL_NAME, 'string', ['length' => 255, 'notnull' => false]);
                     $queries = $persistence->getPlatform()->getMigrateSchemaSql($fromSchema, $schema);
                     foreach ($queries as $query) {
                         $persistence->exec($query);
@@ -712,10 +617,7 @@ class Updater extends common_ext_ExtensionUpdater
         $this->skip('2.11.0', '2.11.1');
 
         if ($this->isVersion('2.11.1')) {
-            $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
-                ->getExtensionById('taoClientDiagnostic');
-
+            $extension = $this->getServiceManager()->get(\common_ext_ExtensionsManager::SERVICE_ID)->getExtensionById('taoClientDiagnostic');
             $config = $extension->getConfig('clientDiag');
             $config['customInput'] = [];
             $extension->setConfig('clientDiag', $config);
@@ -724,10 +626,7 @@ class Updater extends common_ext_ExtensionUpdater
         }
 
         if ($this->isVersion('2.12.0')) {
-            $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
-                ->getExtensionById('taoClientDiagnostic');
-
+            $extension = $this->getServiceManager()->get(\common_ext_ExtensionsManager::SERVICE_ID)->getExtensionById('taoClientDiagnostic');
             $config = $extension->getConfig('clientDiag');
 
             $config['validateSchoolName'] = false;
@@ -743,7 +642,7 @@ class Updater extends common_ext_ExtensionUpdater
 
                 $fromSchema = clone $schema;
 
-                /** @var Table $tableResults */
+                /** @var \Doctrine\DBAL\Schema\Table $tableResults */
                 $tableResults = $schema->getTable(Sql::DIAGNOSTIC_TABLE);
                 $updateTable = false;
 
@@ -751,20 +650,11 @@ class Updater extends common_ext_ExtensionUpdater
                     if ($tableResults->hasColumn('school')) {
                         $tableResults->dropColumn('school');
                     }
-
-                    $tableResults->addColumn(
-                        Sql::DIAGNOSTIC_SCHOOL_NAME,
-                        'string',
-                        ['length' => 255, 'notnull' => false]
-                    );
+                    $tableResults->addColumn(Sql::DIAGNOSTIC_SCHOOL_NAME, 'string', ['length' => 255, 'notnull' => false]);
                     $updateTable = true;
                 }
                 if (! $tableResults->hasColumn(PaginatedSqlStorage::DIAGNOSTIC_SCHOOL_NUMBER)) {
-                    $tableResults->addColumn(
-                        Sql::DIAGNOSTIC_SCHOOL_NUMBER,
-                        'string',
-                        ['length' => 16, 'notnull' => false]
-                    );
+                    $tableResults->addColumn(Sql::DIAGNOSTIC_SCHOOL_NUMBER, 'string', ['length' => 16, 'notnull' => false]);
                     $updateTable = true;
                 }
                 if ($updateTable) {
@@ -783,11 +673,9 @@ class Updater extends common_ext_ExtensionUpdater
         $this->skip('2.13.0', '2.14.1');
 
         if ($this->isVersion('2.14.1')) {
-            $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
-                ->getExtensionById('taoClientDiagnostic');
-
+            $extension = $this->getServiceManager()->get(\common_ext_ExtensionsManager::SERVICE_ID)->getExtensionById('taoClientDiagnostic');
             $config = $extension->getConfig('clientDiag');
+
             $config['testers']['screen'] = [
                 'enabled' => false,
                 'level' => 1,
@@ -810,7 +698,7 @@ class Updater extends common_ext_ExtensionUpdater
 
                 $fromSchema = clone $schema;
 
-                /** @var Table $tableResults */
+                /** @var \Doctrine\DBAL\Schema\Table $tableResults */
                 $tableResults = $schema->getTable(Sql::DIAGNOSTIC_TABLE);
 
                 if (! $tableResults->hasColumn(PaginatedSqlStorage::DIAGNOSTIC_SCREEN_WIDTH)) {
@@ -832,10 +720,7 @@ class Updater extends common_ext_ExtensionUpdater
         $this->skip('2.15.0', '2.17.8');
 
         if ($this->isVersion('2.17.8')) {
-            $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
-                ->getExtensionById('taoClientDiagnostic');
-
+            $extension = $this->getServiceManager()->get(\common_ext_ExtensionsManager::SERVICE_ID)->getExtensionById('taoClientDiagnostic');
             $config = $extension->getConfig('clientDiag');
 
             $config['testers']['bandwidth']['fallbackThreshold'] = 0.2;
@@ -869,7 +754,7 @@ class Updater extends common_ext_ExtensionUpdater
 
             // Update clientDiag.conf.php
             $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
+                ->get(\common_ext_ExtensionsManager::SERVICE_ID)
                 ->getExtensionById('taoClientDiagnostic');
             $oldClientDiagConfig = $extension->getConfig('clientDiag');
             // move value of diagHeader key under header
@@ -887,7 +772,7 @@ class Updater extends common_ext_ExtensionUpdater
         if ($this->isVersion('6.0.0')) {
             // Update clientDiag.conf.php
             $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
+                ->get(\common_ext_ExtensionsManager::SERVICE_ID)
                 ->getExtensionById('taoClientDiagnostic');
             $oldClientDiagConfig = $extension->getConfig('clientDiag');
 
@@ -901,9 +786,7 @@ class Updater extends common_ext_ExtensionUpdater
         $this->skip('6.0.1', '7.1.0');
 
         if ($this->isVersion('7.1.0')) {
-            $extension = $this->getServiceManager()
-                ->get(common_ext_ExtensionsManager::SERVICE_ID)
-                ->getExtensionById('taoClientDiagnostic');
+            $extension = $this->getServiceManager()->get(\common_ext_ExtensionsManager::SERVICE_ID)->getExtensionById('taoClientDiagnostic');
 
             $config = $extension->getConfig('clientDiag');
 
@@ -920,16 +803,11 @@ class Updater extends common_ext_ExtensionUpdater
 
                 $fromSchema = clone $schema;
 
-                /** @var Table $tableResults */
+                /** @var \Doctrine\DBAL\Schema\Table $tableResults */
                 $tableResults = $schema->getTable(Sql::DIAGNOSTIC_TABLE);
 
                 if (! $tableResults->hasColumn(PaginatedSqlStorage::DIAGNOSTIC_SCHOOL_ID)) {
-                    $tableResults->addColumn(
-                        Sql::DIAGNOSTIC_SCHOOL_ID,
-                        'string',
-                        ['length' => 255, 'notnull' => false]
-                    );
-
+                    $tableResults->addColumn(Sql::DIAGNOSTIC_SCHOOL_ID, 'string', ['length' => 255, 'notnull' => false]);
                     $queries = $persistence->getPlatform()->getMigrateSchemaSql($fromSchema, $schema);
                     foreach ($queries as $query) {
                         $persistence->exec($query);
@@ -942,9 +820,9 @@ class Updater extends common_ext_ExtensionUpdater
 
         $this->skip('7.2.0', '7.6.1');
 
-
-        // Updater files are deprecated. Please use migrations.
-        // See: https://github.com/oat-sa/generis/wiki/Tao-Update-Process
+        
+        //Updater files are deprecated. Please use migrations.
+        //See: https://github.com/oat-sa/generis/wiki/Tao-Update-Process
 
         $this->setVersion($this->getExtension()->getManifest()->getVersion());
     }

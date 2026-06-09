@@ -1,12 +1,12 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: TAO 2021.10\n"
-"PO-Revision-Date: 2021-10-26T13:42:59\n"
+"Project-Id-Version: TAO 2022.06\n"
+"PO-Revision-Date: 2026-06-08T14:21:58\n"
 "Last-Translator: TAO Translation Team <translation@tao.lu>\n"
 "MIME-Version: 1.0\n"
-"Language: nb-NO\n"
+"Language: id-ID\n"
 "sourceLanguage: en-US\n"
-"targetLanguage: nb-NO\n"
+"targetLanguage: id-ID\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: ../../\n"
@@ -14,100 +14,106 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 msgid "%d sources (%s)"
-msgstr "%d kilder (%s)"
+msgstr "%d sumber (%s)"
 
 #, tao-public
 msgid "Add"
 msgstr ""
 
 msgid "All rights reserved."
-msgstr "Alle rettigheter forbeholdt."
+msgstr "Hak cipta dilindungi"
 
 msgid "An error occurred! Please verify your input!"
-msgstr "En feil oppstod! Prøv på nytt!"
+msgstr "Terjadi kesalahan! Harap verifikasi masukan Anda!"
 
 msgid "Average bandwidth"
-msgstr "Gjennomsnittlig båndbredde"
+msgstr "Bandwidth rata-rata"
 
 msgid "Average intensive bandwidth"
-msgstr "Gjennomsnittlig intensiv båndbredde"
+msgstr "Bandwidth intensif rata-rata"
 
 msgid "Average performances"
-msgstr "Gjennomsnittlig ytelse"
+msgstr "Performa rata-rata"
 
 msgid "Average rendering time"
-msgstr "Gjennomsnittlig gjengivelsestid"
+msgstr "Waktu rendering rata-rata"
 
 msgid "Average upload speed"
-msgstr "Gjennomsnittlig opplastningshastighet"
+msgstr "Kecepatan unggah rata-rata"
 
 msgid "Bandwidth"
-msgstr "Båndbredde"
+msgstr ""
 
 msgid "Be aware that these tests will take up to several minutes."
-msgstr "Vær oppmerksom på at disse prøvene vil ta opptil flere minutter."
+msgstr "Ketahuilah bahwa tes ini akan memakan waktu hingga beberapa menit."
 
 msgid "Browser"
-msgstr "Nettleser"
+msgstr ""
 
 #, tao-public
 msgid "Browsers Exclusion List"
 msgstr ""
 
 msgid "Cannot get your fingerprint"
-msgstr "Får ikke fingeravtrykk ditt"
+msgstr "Tidak bisa mendapatkan sidik jari Anda"
 
 msgid "Cannot retrieve the school name. Please verify your input"
-msgstr "Kan ikke hente skolens navn. Prøv på nytt"
+msgstr ""
 
 msgid "Change since last fingerprint"
-msgstr "Endring siden siste fingeravtrykk"
+msgstr "Berubah sejak sidik jari terakhir"
 
 msgid "Checking the bandwidth..."
-msgstr "Sjekker båndbredde..."
+msgstr "Memeriksa bandwidth..."
 
 msgid "Checking the browser..."
-msgstr "Sjekker nettleser..."
+msgstr "Memeriksa browser..."
 
 msgid "Checking the media intensive bandwidth..."
-msgstr "Sjekker den medieintensive båndbredden..."
+msgstr "Memeriksa bandwidth intensif media ..."
 
 msgid "Checking the performances..."
-msgstr "Sjekker ytelse..."
+msgstr "Memeriksa performa ..."
 
 msgid "Checking the screen..."
-msgstr "Sjekker skjermen..."
+msgstr "Memeriksa layar..."
 
 msgid "Checking upload speed..."
-msgstr "Sjekker opplastingshastighet..."
+msgstr "Memeriksa kecepatan upload..."
 
 msgid "Computing the fingerprint..."
-msgstr "Beregner fingeravtrykket..."
+msgstr "Menghitung sidik jari ..."
 
 msgid "Connect to the diagnostic tool"
-msgstr "Koble til diagnoseverktøyet"
+msgstr "Hubungkan ke alat diagnostik"
 
 msgid "Date"
-msgstr "Dato"
+msgstr "Tanggal"
 
 #, tao-public
 msgid "Delete"
 msgstr ""
 
 msgid "Details"
-msgstr "Detaljer"
+msgstr "Detail"
 
 msgid "Diagnostic Tool"
-msgstr "Diagnoseverktøy"
+msgstr "Alat Diagnosa"
+
+msgid "Diagnostic Tool as a guest"
+msgstr ""
+
+msgid "Diagnostic Tool with Guest Access"
+msgstr ""
 
 msgid "diagnostics.csv"
-msgstr "diagnostics.csv"
+msgstr "diagnostik.csv"
 
 msgid "Done!"
-msgstr "Ferdig!"
+msgstr "Selesai!"
 
 msgid "Dynamic UID"
-msgstr "Dynamisk UID"
+msgstr "UID Dinamik"
 
 msgid "Edit Excluded Browser"
 msgstr ""
@@ -116,7 +122,7 @@ msgid "Edit Excluded Operation System"
 msgstr ""
 
 msgid "Errors occurred! Please see details"
-msgstr "Det oppstod feil! Se detaljer"
+msgstr "Terjadi kesalahan! Silakan lihat detailnya"
 
 #, tao-public
 msgid "Excluded Browsers"
@@ -131,131 +137,131 @@ msgid "Exclusion List"
 msgstr ""
 
 msgid "Exit"
-msgstr "Exit"
+msgstr "Keluar"
 
 msgid "Export CSV"
-msgstr "Eksporter CSV"
+msgstr "Ekspor CSV"
 
 msgid "Failed to get school name"
-msgstr "Kunne ikke finne skolen"
+msgstr ""
 
 msgid "Fingerprint"
-msgstr "Fingeravtrykk"
+msgstr "Sidik jari"
 
 msgid "Fingerprint error"
-msgstr "Fingeravtrykkfeil"
+msgstr "Kesalahan sidik jari"
 
 msgid "Fingerprint errors"
-msgstr "Fingeravtrykkfeil"
+msgstr "Kesalahan sidik jari"
 
 msgid "Fingerprint sources"
-msgstr "Fingeravtrykkskilder"
+msgstr "Sumber sidik jari"
 
 msgid "Getting school name..."
-msgstr "Gå tilgang til skolens navn...."
+msgstr ""
 
 msgid "Good bandwidth"
-msgstr "God båndbredde"
+msgstr "Bandwidth baik"
 
 msgid "Good performances"
-msgstr "God ytelse"
+msgstr "Performa baik"
 
 msgid "Good upload speed"
-msgstr "God opplastningshastighet"
+msgstr "Kecepatan upload baik"
 
 msgid "Hide Details"
-msgstr "Skjul detaljer"
+msgstr "Sembunyikan detail"
 
 msgid "Instance saved"
 msgstr ""
 
 msgid "Intensive bandwidth"
-msgstr "Intensiv båndbredde"
+msgstr "Bandwidth intensif"
 
 msgid "Interface not available"
-msgstr "Grensesnitt ikke tilgjengelig"
+msgstr "Antarmuka tidak tersedia"
 
 msgid "Launch another readiness check"
-msgstr "Start en ny beredskapskontroll"
+msgstr "Luncurkan pemeriksaan kesiapan lainnya"
 
 msgid "Launch readiness check"
-msgstr "Start beredskapskontroll"
+msgstr "Luncurkan pemeriksaan kesiapan"
 
 msgid "List of readiness checks"
-msgstr "Liste over beredskapskontroller"
+msgstr "Daftar pemeriksaan kesiapan"
 
 msgid "Loading"
-msgstr "Laster"
+msgstr "Memuat"
 
 msgid "Log in"
-msgstr "Logg inn"
+msgstr ""
 
 msgid "Login"
-msgstr "Logg inn"
+msgstr ""
 
 msgid "Logout"
-msgstr "Logg ut"
+msgstr ""
 
 msgid "Low bandwidth"
-msgstr "Lav båndbredde"
+msgstr "Bandwidth rendah"
 
 msgid "Low upload speed"
-msgstr "Lav opplastningshastighet"
+msgstr "Kecepatan unggah rendah"
 
 msgid "Main Menu"
-msgstr "Hovedmeny"
+msgstr ""
 
 msgid "Max upload speed"
-msgstr "Maks opplastningshastighet"
+msgstr "Kecepatan unggah maks"
 
 msgid "Maximum bandwidth"
-msgstr "Maksimal båndbredde"
+msgstr "Bandwidth maksimal"
 
 msgid "Maximum intensive bandwidth"
-msgstr "Maksimal intensiv båndbredde"
+msgstr "Bandwidth intensif maksimum"
 
 msgid "Maximum rendering time"
-msgstr "Maksimal gjengivelsestid"
+msgstr "Waktu rendering maksimum"
 
 msgid "Media intensive bandwidth"
-msgstr "Medieintensiv båndbredde"
+msgstr "Bandwidth intensif media"
 
 msgid "Minimum bandwidth"
-msgstr "Minimum båndbredde"
+msgstr "Bandwidth minimum"
 
 msgid "Minimum intensive bandwidth"
-msgstr "Minimum intensiv båndbredde"
+msgstr "Bandwidth intensif minimum"
 
 msgid "Minimum rendering time"
-msgstr "Minimum gjengivelsestid"
+msgstr "Waktu rendering minimum"
 
 msgid "Missing field %s"
-msgstr "Feltet %s mangler"
+msgstr ""
 
 #, tao-public
 msgid "New Class"
 msgstr ""
 
 msgid "No"
-msgstr "Ingen"
+msgstr ""
 
 msgid "No diagnostic service defined"
-msgstr "Ingen diagnostisk tjeneste er definert"
+msgstr ""
 
 msgid "No readiness checks have been done!"
-msgstr "Ingen beredskapskontroller er utført!"
+msgstr ""
 
 msgid "Number of simultaneous test takers the connection can handle"
-msgstr "Antall samtidige pålogginger tilkoblingen kan håndtere"
+msgstr "Jumlah peserta tes simultan yang dapat ditangani koneksi"
 
 msgid "Number of simultaneous test takers the connection can handle with media intensive"
-msgstr "Antall samtidige pålogginger tilkoblingen kan håndtere med medieintensive"
+msgstr "Jumlah peserta tes simultan yang dapat ditangani koneksi dengan intensif media"
 
 msgid "Operating system"
-msgstr "Operativsystem"
+msgstr "Sistem operasi"
 
 msgid "Operating system and web browser"
-msgstr "Operativsystem og nettleser"
+msgstr "Sistem operasi dan web browser"
 
 msgid "OS"
 msgstr "OS"
@@ -265,120 +271,120 @@ msgid "OS Exclusion List"
 msgstr ""
 
 msgid "Performances"
-msgstr "Ytelse"
+msgstr "Performa"
 
 #, tao-public
 msgid "Properties"
 msgstr ""
 
 msgid "Readiness Check"
-msgstr "Beredskapskontroll"
+msgstr "Pemeriksaan Kesiapan"
 
 msgid "Readiness checks already done"
-msgstr "Beredskapskontrollene er allerede utført"
+msgstr "Pemeriksaan kesiapan sudah dilakukan"
 
 msgid "Readiness diagnostics"
-msgstr "Beredskapsdiagnostikk"
+msgstr "Diagnostik kesiapan"
 
 msgid "Refresh"
-msgstr "Oppdater"
+msgstr "Refresh"
 
 msgid "Refresh the page"
-msgstr "Oppdater siden"
+msgstr "Refresh halaman"
 
 msgid "Remove"
-msgstr "Fjern"
+msgstr ""
 
 msgid "Remove the readiness check result?"
-msgstr "Vil du fjerne beredskapskontrollresultatet?"
+msgstr ""
 
 msgid "Remove the selected readiness check results"
-msgstr "Fjern de valgte beredskapskontrollresultatene"
+msgstr ""
 
 msgid "Return to the list"
-msgstr "Gå tilbake til listen"
-
-msgid "School ID"
-msgstr "Skole-ID"
+msgstr ""
 
 msgid "School id"
-msgstr "Skole-id"
+msgstr ""
+
+msgid "School ID"
+msgstr ""
 
 msgid "School ID:"
-msgstr "Skole-ID:"
+msgstr ""
 
 msgid "School name"
-msgstr "Skolenavn"
+msgstr ""
 
 msgid "School name:"
-msgstr "Skolenavn:"
+msgstr ""
 
 msgid "School number"
-msgstr "Skolenummer"
+msgstr ""
 
 msgid "School number:"
-msgstr "Skolenummer:"
+msgstr ""
 
 msgid "School PIN code (4 digits)"
-msgstr "Skolens PIN-kode (4 sifre)"
+msgstr ""
 
 msgid "School PIN:"
-msgstr "Skolens PIN-kode:"
+msgstr ""
 
 msgid "Screen Height"
-msgstr "Skjermhøyde"
+msgstr "Tinggi layar"
 
 msgid "Screen resolution"
-msgstr "Skjermoppløsning"
+msgstr "Resolusi layar"
 
 msgid "Screen Width"
-msgstr "Skjermbredde"
+msgstr "Lebar Layar"
 
 #, tao-public
 msgid "Settings"
 msgstr ""
 
 msgid "Show Details"
-msgstr "Vis detaljer"
+msgstr "Tunjukkan Detail"
 
 msgid "Show fingerprint details"
-msgstr "Vis detaljer om fingeravtrykk"
+msgstr "Tampilkan detail sidik jari"
 
 msgid "Simultaneous test takers under normal connection conditions."
-msgstr "Samtidig pålogginger under normale tilkoblingsforhold."
+msgstr "Peserta tes simultan dalam kondisi koneksi normal."
 
 msgid "Something went wrong ..."
-msgstr "Noe gikk galt..."
+msgstr "Ada yang salah ..."
 
 msgid "Starting..."
-msgstr "Starter..."
+msgstr "Memulai ..."
 
 msgid "System Compatibility"
-msgstr "Systemkompatibilitet"
+msgstr "Kompatibilitas Sistem"
 
 msgid "Test system compatibility"
-msgstr "Testsystemkompatibilitet"
+msgstr "Uji kompatibilitas sistem"
 
 msgid "The device screen does not meet the minimum resolution of %s!"
-msgstr "Enhetsskjermen oppfyller ikke minimumsoppløsningen på %s!"
+msgstr "Layar perangkat tidak memenuhi resolusi minimum %s!"
 
 msgid "The device screen has the minimum required resolution."
-msgstr "Enhetens skjerm har et minimum av nødvendig oppløsning."
+msgstr "Layar perangkat memiliki resolusi minimum yang diperlukan."
 
 msgid "The device screen resolution meets the requirements."
-msgstr "Enhetens skjermoppløsning oppfyller kravene."
+msgstr "Resolusi layar perangkat memenuhi persyaratan."
 
 msgid "The readiness check result have been removed"
-msgstr "Beredskapskontrollresultatet er fjernet"
+msgstr "Hasil pemeriksaan kesiapan telah dihapus"
 
 msgid "The readiness check result will be removed. Continue ?"
-msgstr "Beredskapskontrollresultatet vil bli fjernet. Vil du fortsette?"
+msgstr "Hasil pemeriksaan kesiapan akan dihapus. Lanjutkan?"
 
 msgid "The selected readiness check results will be removed. Continue ?"
-msgstr "De valgte beredskapskontrollresultatene vil bli fjernet. Vil du fortsette?"
+msgstr "Hasil pemeriksaan kesiapan yang dipilih akan dihapus. Lanjutkan?"
 
 msgid "The storage service provided to store the diagnostic results must be upgraded to support reads!"
-msgstr "Lagringstjenesten som tilbys for å lagre diagnoseresultatene må oppgraderes til støtte for leser!"
+msgstr ""
 
 msgid "This browser is compatible but its support may end soon."
 msgstr ""
@@ -387,19 +393,22 @@ msgid "This browser is not supported."
 msgstr ""
 
 msgid "This browser is not tested."
-msgstr "Denne nettleseren er ikke testet."
+msgstr "Browser ini tidak diuji."
 
 msgid "This browser is supported."
-msgstr ""
+msgstr "Browser ini belum didukung."
+
+msgid "This tool will run a number of tests in order to establish how well your current environment is suitable to run the TAO platform."
+msgstr "Alat ini akan menjalankan sejumlah pengujian untuk menetapkan seberapa baik lingkungan Anda saat ini cocok untuk menjalankan platform UTBK SIMA UNAND."
 
 msgid "Total"
 msgstr "Total"
 
 msgid "Try a test delivery"
-msgstr "Kjør en prøveinnlevering"
+msgstr ""
 
 msgid "Unable to get the workstation name!"
-msgstr "Klarer ikke å hente navnet på arbeidsstasjonen!"
+msgstr ""
 
 msgid "Unable to save the results! Please check your connection."
 msgstr ""
@@ -411,38 +420,38 @@ msgid "Unknown"
 msgstr ""
 
 msgid "Upload speed"
-msgstr "Opplastningshastighet"
+msgstr "Kecepatan upload"
 
 msgid "Very slow performances"
-msgstr "Veldig treg ytelse"
+msgstr "Performa sangat lambat"
 
 msgid "Web browser"
-msgstr "Nettleser"
+msgstr ""
 
 msgid "Workstation"
-msgstr "Arbeidsstasjon"
+msgstr "Komputer"
 
 msgid "Workstation name"
-msgstr "Arbeidsstasjonens navn"
+msgstr "Nama komputer"
 
 msgid "Workstation performances"
-msgstr "Arbeidsstasjonens ytelse"
+msgstr "Performa Komputer"
 
 msgid "Workstation:"
-msgstr "Arbeidsstasjon:"
+msgstr "Komputer:"
 
 msgid "Yes"
-msgstr "Ja"
+msgstr "Ya"
 
 msgid "Your fingerprint is %s"
-msgstr "Fingeravtrykket ditt er %s"
+msgstr "Sidik jari Anda adalah %s"
 
 msgid "Your system is fully compliant."
-msgstr "Systemet ditt er fullt kompatibelt."
+msgstr "Sistem Anda sepenuhnya sesuai."
 
 msgid "Your system is not optimal, please contact your system administrator."
-msgstr "Systemet ditt er ikke optimalt. Ta kontakt med systemadministrator."
+msgstr "Sistem Anda tidak optimal, harap hubungi administrator sistem Anda."
 
 msgid "Your system requires a compatibility update, please contact your system administrator."
-msgstr "Systemet krever en kompatibilitetsoppdatering. Ta kontakt med systemadministrator."
+msgstr "Sistem Anda memerlukan pembaruan kompatibilitas, silakan hubungi administrator sistem Anda."
 

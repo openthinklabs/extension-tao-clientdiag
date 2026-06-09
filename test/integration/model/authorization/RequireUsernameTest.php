@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -15,7 +14,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2015-2023 (original work) Open Assessment Technologies SA;
+ * Copyright (c) 2015 (original work) Open Assessment Technologies SA;
+ *
+ *
  */
 
 namespace oat\taoClientDiagnostic\test\integration\model\authorization;
@@ -23,7 +24,6 @@ namespace oat\taoClientDiagnostic\test\integration\model\authorization;
 use oat\generis\test\TestCase;
 use oat\taoClientDiagnostic\exception\InvalidLoginException;
 use oat\taoClientDiagnostic\model\authorization\RequireUsername;
-use tao_models_classes_UserService;
 
 class RequireUsernameTest extends TestCase
 {
@@ -33,16 +33,15 @@ class RequireUsernameTest extends TestCase
     public function setUp(): void
     {
         $this->instance = new RequireUsername();
-        $aclMock = $this->getMockBuilder(tao_models_classes_UserService::class)
+        $aclMock = $this->getMockBuilder('\tao_models_classes_UserService')
             ->disableOriginalConstructor()
             ->getMock();
         $aclMock->method('loginExists')
             ->willReturn(false);
-        $this->instance->setServiceLocator(
-            $this->getServiceLocatorMock([
-                tao_models_classes_UserService::SERVICE_ID => $aclMock
-            ])
-        );
+        $this->instance->setServiceLocator($this->getServiceLocatorMock([
+            \tao_models_classes_UserService::SERVICE_ID => $aclMock
+        ]));
+
     }
 
     public function tearDown(): void
@@ -62,15 +61,8 @@ class RequireUsernameTest extends TestCase
     public function testGetAuthorizationUrl()
     {
         $urlFixture = 'fakeUrl';
-        $this->assertEquals(
-            $this->instance->getAuthorizationUrl($urlFixture),
-            _url(
-                'login',
-                'Authenticator',
-                'taoClientDiagnostic',
-                array('successCallback' => $urlFixture)
-            )
-        );
+        $expectedResult = _url('login', 'Authenticator', 'taoClientDiagnostic', array('successCallback' => $urlFixture));
+        $this->assertEquals($this->instance->getAuthorizationUrl($urlFixture), $expectedResult);
     }
 
     public function getLoginData()
@@ -86,25 +78,18 @@ class RequireUsernameTest extends TestCase
     /**
      * @dataProvider getLoginData
      */
-    public function testValidateLogin(
-        $loginFixture,
-        $hasException,
-        $exception,
-        $useACLService = false,
-        $returnACL = false
-    ) {
+    public function testValidateLogin($loginFixture, $hasException, $exception, $useACLService = false, $returnACL = false)
+    {
         if ($useACLService) {
-            $aclFixture = $this->getMockBuilder(tao_models_classes_UserService::class)
+            $aclFixture = $this->getMockBuilder('\tao_models_classes_UserService')
                 ->disableOriginalConstructor()
                 ->getMock();
             $aclFixture->method('loginExists')
                 ->willReturn($returnACL);
 
-            $this->instance->setServiceLocator(
-                $this->getServiceLocatorMock([
-                    tao_models_classes_UserService::SERVICE_ID => $aclFixture
-                ])
-            );
+            $this->instance->setServiceLocator($this->getServiceLocatorMock([
+                \tao_models_classes_UserService::SERVICE_ID => $aclFixture
+            ]));
         }
 
         if ($hasException) {

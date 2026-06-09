@@ -13,7 +13,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2016-2024 (original work) Open Assessment Technologies SA ;
+ * Copyright (c) 2016-2021 (original work) Open Assessment Technologies SA ;
  */
 define([
     'jquery',
@@ -40,7 +40,7 @@ define([
     'tpl!taoClientDiagnostic/tools/diagnostic/tpl/feedback',
     'tpl!taoClientDiagnostic/tools/diagnostic/tpl/quality-bar',
     'css!taoClientDiagnosticCss/diagnostics'
-], function (
+], function(
     $,
     _,
     __,
@@ -79,9 +79,7 @@ define([
      */
     const _defaults = {
         title: __('System Compatibility'),
-        header: __(
-            'This tool will run a number of tests in order to establish how well your current environment is suitable to run the TAO platform.'
-        ),
+        header: __('This tool will run a number of tests in order to establish how well your current environment is suitable to run the TAO platform.'),
         info: __('Be aware that these tests will take up to several minutes.'),
         button: __('Test system compatibility'),
         actionStore: 'storeData',
@@ -418,7 +416,7 @@ define([
                     // launch each testers in series, then display the results
                     async.series(testers, () => {
                         // pick the lowest percentage as the main score
-                        const total = _.minBy(Object.values(scores), 'globalPercentage');
+                        const total = _.min(scores, 'globalPercentage');
 
                         // get a status according to the main score
                         const status = getStatus(total.globalPercentage, _thresholds);
@@ -631,7 +629,7 @@ define([
                      * @private
                      */
                     function toggleFields(state) {
-                        _.forEach(fields, function (fieldName) {
+                        _.forEach(fields, function(fieldName) {
                             toggleControl(fieldName, state);
                         });
                     }
@@ -696,7 +694,9 @@ define([
                             {}
                         );
 
-                        this.changeStatus(__('Getting school name...')).cleanUp().disable();
+                        this.changeStatus(__('Getting school name...'))
+                            .cleanUp()
+                            .disable();
 
                         if (_.isFunction(validate)) {
                             validate(values)

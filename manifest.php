@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +24,6 @@ use oat\taoClientDiagnostic\controller\Diagnostic;
 use oat\taoClientDiagnostic\scripts\install\createDiagnosticTable;
 use oat\tao\model\accessControl\func\AccessRule;
 use oat\taoClientDiagnostic\scripts\install\RegisterDiagnosticComponent;
-use oat\taoClientDiagnostic\scripts\install\SetupServices;
 
 return array(
     'name'        => 'taoClientDiagnostic',
@@ -35,26 +33,21 @@ return array(
     'author'      => 'Open Assessment Technologies SA',
     'managementRole' => 'http://www.tao.lu/Ontologies/generis.rdf#taoClientDiagnosticManager',
     'acl' => array(
-        //phpcs:disable
-        array('grant', 'http://www.tao.lu/Ontologies/generis.rdf#taoClientDiagnosticManager', array('ext' => 'taoClientDiagnostic')),
-        array('grant', 'http://www.tao.lu/Ontologies/generis.rdf#AnonymousRole', array('ext' => 'taoClientDiagnostic','mod' => 'CompatibilityChecker')),
-        array('grant', 'http://www.tao.lu/Ontologies/generis.rdf#AnonymousRole', array('ext' => 'taoClientDiagnostic','mod' => 'Authenticator')),
+        array('grant', 'http://www.tao.lu/Ontologies/generis.rdf#taoClientDiagnosticManager', array('ext'=>'taoClientDiagnostic')),
+        array('grant', 'http://www.tao.lu/Ontologies/generis.rdf#AnonymousRole', array('ext'=>'taoClientDiagnostic','mod' => 'CompatibilityChecker')),
+        array('grant', 'http://www.tao.lu/Ontologies/generis.rdf#AnonymousRole', array('ext'=>'taoClientDiagnostic','mod' => 'Authenticator')),
         array(AccessRule::GRANT, ClientDiagnosticRoles::READINESS_CHECKER_ROLE, Diagnostic::class),
         array(AccessRule::GRANT, ClientDiagnosticRoles::READINESS_CHECKER_ROLE, DiagnosticChecker::class),
-        //phpcs:enable
     ),
     'install' => array(
         'rdf' => array(
-            //phpcs:disable
             __DIR__ . DIRECTORY_SEPARATOR . 'install' . DIRECTORY_SEPARATOR . 'ontology' . DIRECTORY_SEPARATOR . 'roles.rdf',
             __DIR__ . DIRECTORY_SEPARATOR . 'install' . DIRECTORY_SEPARATOR . 'ontology' . DIRECTORY_SEPARATOR . 'ExcludedBrowsersList.rdf',
             __DIR__ . DIRECTORY_SEPARATOR . 'install' . DIRECTORY_SEPARATOR . 'ontology' . DIRECTORY_SEPARATOR . 'ExcludedOSList.rdf',
-            //phpcs:enable
         ),
         'php' => array(
             createDiagnosticTable::class,
-            RegisterDiagnosticComponent::class,
-            SetupServices::class,
+            RegisterDiagnosticComponent::class
         )
     ),
     'uninstall' => array(
@@ -63,14 +56,14 @@ return array(
     'routes' => array(
         '/taoClientDiagnostic' => 'oat\\taoClientDiagnostic\\controller'
     ),
-    'constants' => array(
-        # views directory
-        "DIR_VIEWS" => dirname(__FILE__) . DIRECTORY_SEPARATOR . "views" . DIRECTORY_SEPARATOR,
+	'constants' => array(
+	    # views directory
+	    "DIR_VIEWS" => dirname(__FILE__).DIRECTORY_SEPARATOR."views".DIRECTORY_SEPARATOR,
 
-        #BASE URL (usually the domain root)
-        'BASE_URL' => ROOT_URL . 'taoClientDiagnostic/',
-    ),
+		#BASE URL (usually the domain root)
+		'BASE_URL' => ROOT_URL.'taoClientDiagnostic/',
+	),
     'extra' => array(
-        'structures' => dirname(__FILE__) . DIRECTORY_SEPARATOR . 'controller' . DIRECTORY_SEPARATOR . 'structures.xml',
+        'structures' => dirname(__FILE__).DIRECTORY_SEPARATOR.'controller'.DIRECTORY_SEPARATOR.'structures.xml',
     )
 );

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,35 +15,41 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2015 (original work) Open Assessment Technologies SA;
+ * Copyright (c) 2014 (original work) Open Assessment Technologies SA;
  *
  *
  */
 
-namespace oat\taoClientDiagnostic\model\authorization;
+namespace oat\taoClientDiagnostic\model\guest;
 
-use oat\oatbox\service\ConfigurableService;
-use oat\taoClientDiagnostic\exception\InvalidCallException;
+use oat\oatbox\Configurable;
+use oat\tao\model\entryPoint\Entrypoint;
 
-/**
- * Class AnonymousLogin
- * @package oat\taoClientDiagnostic\model\authorization
- */
-class Anonymous extends ConfigurableService implements Authorization
+class GuestAccess extends Configurable implements Entrypoint
 {
-    /**
-     * @inheritdoc
-     */
-    public function isAuthorized()
-    {
-        return true;
-    }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAuthorizationUrl($url)
+    public function getId()
     {
-        throw new InvalidCallException();
+        return 'clientDiagGuestAccess';
+    }
+    
+    public function getTitle()
+    {
+        return __('Diagnostic Tool');
+    }
+    
+    public function getLabel()
+    {
+        return __('Diagnostic Tool with Guest Access');
+    }
+    
+    public function getDescription()
+    {
+        return __('Diagnostic Tool as a guest');
+    }
+    
+    public function getUrl()
+    {
+        return _url("index", "CompatibilityChecker", "taoClientDiagnostic");
     }
 }
